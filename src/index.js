@@ -10,17 +10,18 @@ import Player from "./player.js";
 let board = Gameboard();
 let player = Player("human", board);
 let comp = Player("computer", board);
+let initialized = 0;
 
 function randomizeShips() {
   // Reset the player's gameboard
   player.gameboard = Gameboard();
-
+  initialized = 1;
   let ships = [
     Ship(5, 0, false),
     Ship(4, 0, false),
     Ship(3, 0, false),
     Ship(3, 0, false),
-    Ship(2, 0, false), // Adjusted length if needed
+    Ship(2, 0, false),
   ];
 
   // Keep track of occupied positions to avoid overlaps
@@ -245,6 +246,9 @@ function updateDOM(player, comp) {
         let square = document.querySelector(
           "." + key + " .square:nth-child(" + (i + 1) + ")"
         );
+        square.classList.remove("green");
+        square.classList.remove("red");
+        square.innerHTML = "";
         if (player.gameboard[key][i] != undefined) {
           square.classList.add("green");
           for (let j = 0; j < player.gameboard.hits.length; j++) {
@@ -257,9 +261,6 @@ function updateDOM(player, comp) {
             }
           }
         } else {
-          square.classList.remove("green");
-          square.classList.remove("red");
-          square.innerHTML = "";
           for (let t = 0; t < player.gameboard.misses.length; t++) {
             if (
               player.gameboard.misses[t][0] == key &&
@@ -332,6 +333,13 @@ for (let i = 0; i < 10; i++) {
         ".computer." + key + " .square:nth-child(" + (i + 1) + ")"
       );
       square.addEventListener("click", function () {
+        if (notRandomized() == true) {
+          alert("You need to randomize the board first!");
+          randomizeShips();
+          randomizeShipsOpp();
+          updateDOM(player, comp);
+          return;
+        }
         for (let t = 0; t < comp.gameboard.misses.length; t++) {
           if (
             comp.gameboard.misses[t][0] == key &&
@@ -372,6 +380,14 @@ randomize.addEventListener("click", function () {
 randomize.addEventListener("mouseup", function () {
   randomize.classList.remove("down");
 });
+
+function notRandomized() {
+  if (initialized == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 const closePopupButton = document.getElementById("closePopup");
 const popupHead = document.querySelector(".popupHead");
