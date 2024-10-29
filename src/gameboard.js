@@ -43,46 +43,24 @@ function Gameboard() {
       }
     },
     allSunk() {
+      const ships = [
+        this.A,
+        this.B,
+        this.C,
+        this.D,
+        this.E,
+        this.F,
+        this.G,
+        this.H,
+        this.I,
+        this.J,
+      ];
+
+      // Loop through each array and check each item
       for (let i = 0; i < 10; i++) {
-        if (this.A[i] != undefined) {
-          if (this.A[i].isSunk() == false) {
+        for (let ship of ships) {
+          if (ship[i] != undefined && !ship[i].isSunk()) {
             return false;
-          }
-        } else if (this.B[i] != undefined) {
-          if (this.B[i].isSunk() == false) {
-            return false;
-          }
-        } else if (this.C[i] != undefined) {
-          if (this.C[i].isSunk() == false) {
-            return false;
-          }
-        } else if (this.D[i] != undefined) {
-          if (this.D[i].isSunk() == false) {
-            return false;
-          } else if (this.E[i] != undefined) {
-            if (this.E[i].isSunk() == false) {
-              return false;
-            }
-          } else if (this.F[i] != undefined) {
-            if (this.F[i].isSunk() == false) {
-              return false;
-            } else if (this.G[i] != undefined) {
-              if (this.G[i].isSunk() == false) {
-                return false;
-              }
-            } else if (this.H[i] != undefined) {
-              if (this.H[i].isSunk() == false) {
-                return false;
-              }
-            } else if (this.I[i] != undefined) {
-              if (this.I[i].isSunk() == false) {
-                return false;
-              }
-            } else if (this.J[i] != undefined) {
-              if (this.J[i].isSunk() == false) {
-                return false;
-              }
-            }
           }
         }
       }

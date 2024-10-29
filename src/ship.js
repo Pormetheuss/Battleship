@@ -7,11 +7,11 @@ function Ship(length, hits, sunk) {
       this.hits++;
     },
     isSunk() {
-      if (hits == length) {
-        sunk = true;
+      if (this.hits == this.length) {
+        this.sunk = true;
         return true;
       } else {
-        sunk = false;
+        this.sunk = false;
         return false;
       }
     },

@@ -94,3 +94,21 @@ h1 {
 .red {
   background-color: #ff0000;
 }
+
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it's on top */
+}
+.popupHead {
+  font-family: KodeMono;
+  font-size: 30px;
+  color: rgb(58, 234, 58);
+}
